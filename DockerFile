@@ -1,0 +1,11 @@
+FROM adoptopenjdk:11-jre-hotspot
+
+RUN mkdir /opt/app
+
+WORKDIR /opt/app
+
+COPY target/shop_backend-0.0.1-SNAPSHOT.jar .
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "shop_backend-0.0.1-SNAPSHOT.jar", "--spring.config.location=resources/"]

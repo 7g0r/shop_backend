@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://swiderski.com/rental-service/schema/car" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CarSoapService" targetNamespace="http://swiderski.com/rental-service/schema/car">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://swiderski.com/rental-service/schema/rental" xmlns:ns3="http://swiderski.com/rental-service/schema/client" xmlns:ns2="http://swiderski.com/rental-service/schema/car" xmlns:ns1="http://swiderski.com/rental-service/schema/pageable" elementFormDefault="qualified" targetNamespace="http://swiderski.com/rental-service/schema/rental" version="1.0">
+
+            <xs:import namespace="http://swiderski.com/rental-service/schema/pageable"/>
+
+            <xs:import namespace="http://swiderski.com/rental-service/schema/car"/>
+
+            <xs:import namespace="http://swiderski.com/rental-service/schema/client"/>
+
+            <xs:element name="CarRentRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="carId" type="xs:long"/>
+                        <xs:element name="clientId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="CarReturnRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="rentalId" type="xs:long"/>
+                        <xs:element name="rentalEnd" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="Rental">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="rental" type="tns:RentalData"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="RentalDeleteRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="RentalList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="page" type="ns1:PageableXml"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="RentalListRequest">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="ns1:PageRequest">
+                            <xs:sequence/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="RentalRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:complexType name="RentalData">
+                <xs:complexContent>
+                    <xs:extension base="ns1:anyTypeXml">
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:long"/>
+                            <xs:element name="rentalBegin" type="xs:date"/>
+                            <xs:element name="rentalEnd" type="xs:date"/>
+                            <xs:element name="car" type="ns2:CarData"/>
+                            <xs:element name="client" type="ns3:ClientData"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+
+        </xs:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://swiderski.com/rental-service/schema/pageable" elementFormDefault="qualified" targetNamespace="http://swiderski.com/rental-service/schema/pageable" version="1.0">
+
+            <xs:complexType name="PageRequest">
+                <xs:sequence>
+                    <xs:element default="0" name="pageNo" type="xs:int"/>
+                    <xs:element default="10" name="pageSize" type="xs:int"/>
+                    <xs:element default="id" name="sortBy" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="PageableXml">
+                <xs:sequence>
+                    <xs:element name="totalPages" type="xs:long"/>
+                    <xs:element name="totalElements" type="xs:long"/>
+                    <xs:element name="numberOfElements" type="xs:long"/>
+                    <xs:element name="size" type="xs:long"/>
+                    <xs:element name="number" type="xs:long"/>
+                    <xs:element name="empty" type="xs:boolean"/>
+                    <xs:element name="first" type="xs:boolean"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="content" nillable="true" type="tns:anyTypeXml"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="anyTypeXml">
+                <xs:sequence/>
+            </xs:complexType>
+
+        </xs:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://swiderski.com/rental-service/schema/client" xmlns:ns1="http://swiderski.com/rental-service/schema/pageable" elementFormDefault="qualified" targetNamespace="http://swiderski.com/rental-service/schema/client" version="1.0">
+
+            <xs:import namespace="http://swiderski.com/rental-service/schema/pageable"/>
+
+            <xs:element name="Client">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="client" type="tns:ClientData"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ClientDeleteRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ClientList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="page" type="ns1:PageableXml"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ClientListRequest">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="ns1:PageRequest">
+                            <xs:sequence>
+                                <xs:element name="clientFilter" type="tns:ClientFilter"/>
+                            </xs:sequence>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ClientRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:complexType name="ClientFilter">
+                <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="surname" type="xs:string"/>
+                    <xs:element name="email" type="xs:string"/>
+                    <xs:element name="city" type="xs:string"/>
+                    <xs:element name="street" type="xs:string"/>
+                    <xs:element name="zipCode" type="xs:string"/>
+                    <xs:element name="phone" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ClientData">
+                <xs:complexContent>
+                    <xs:extension base="ns1:anyTypeXml">
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:long"/>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="surname" type="xs:string"/>
+                            <xs:element name="email" type="xs:string"/>
+                            <xs:element name="city" type="xs:string"/>
+                            <xs:element name="street" type="xs:string"/>
+                            <xs:element name="zipCode" type="xs:string"/>
+                            <xs:element name="phone" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+
+        </xs:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://swiderski.com/rental-service/schema/car" xmlns:ns1="http://swiderski.com/rental-service/schema/pageable" elementFormDefault="qualified" targetNamespace="http://swiderski.com/rental-service/schema/car" version="1.0">
+
+            <xs:import namespace="http://swiderski.com/rental-service/schema/pageable"/>
+
+            <xs:element name="Car">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="car" type="tns:CarData"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="CarDeleteRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="CarList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="page" type="ns1:PageableXml"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="CarListRequest">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="ns1:PageRequest">
+                            <xs:sequence>
+                                <xs:element name="carFilter" type="tns:CarFilter"/>
+                            </xs:sequence>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="CarRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:complexType name="CarFilter">
+                <xs:sequence>
+                    <xs:element name="brand" type="xs:string"/>
+                    <xs:element name="model" type="xs:string"/>
+                    <xs:element name="colour" type="xs:string"/>
+                    <xs:element name="yearFrom" type="xs:integer"/>
+                    <xs:element name="yearTo" type="xs:integer"/>
+                    <xs:element name="engineType" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="CarData">
+                <xs:complexContent>
+                    <xs:extension base="ns1:anyTypeXml">
+                        <xs:sequence>
+                            <xs:element name="id" type="xs:long"/>
+                            <xs:element name="brand" type="xs:string"/>
+                            <xs:element name="model" type="xs:string"/>
+                            <xs:element name="modelVersion" type="xs:string"/>
+                            <xs:element name="colour" type="xs:string"/>
+                            <xs:element name="engineType" type="xs:string"/>
+                            <xs:element name="productionYear" type="xs:int"/>
+                            <xs:element name="cost" type="xs:double"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="addCarResponse">
+        <wsdl:part element="tns:Car" name="out">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteCar">
+        <wsdl:part element="tns:CarDeleteRequest" name="in">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addCar">
+        <wsdl:part element="tns:Car" name="in">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCar">
+        <wsdl:part element="tns:CarRequest" name="in">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCarResponse">
+        <wsdl:part element="tns:Car" name="out">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getAllCarsResponse">
+        <wsdl:part element="tns:CarList" name="out">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteCarResponse">
+        <wsdl:part element="tns:Car" name="out">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getAllCars">
+        <wsdl:part element="tns:CarListRequest" name="in">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="CarSOAP">
+        <wsdl:operation name="getAllCars">
+            <wsdl:input message="tns:getAllCars" name="getAllCars">
+            </wsdl:input>
+            <wsdl:output message="tns:getAllCarsResponse" name="getAllCarsResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteCar">
+            <wsdl:input message="tns:deleteCar" name="deleteCar">
+            </wsdl:input>
+            <wsdl:output message="tns:deleteCarResponse" name="deleteCarResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addCar">
+            <wsdl:input message="tns:addCar" name="addCar">
+            </wsdl:input>
+            <wsdl:output message="tns:addCarResponse" name="addCarResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCar">
+            <wsdl:input message="tns:getCar" name="getCar">
+            </wsdl:input>
+            <wsdl:output message="tns:getCarResponse" name="getCarResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CarSoapServiceSoapBinding" type="tns:CarSOAP">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getAllCars">
+            <soap12:operation soapAction="" style="document"/>
+            <wsdl:input name="getAllCars">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getAllCarsResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteCar">
+            <soap12:operation soapAction="" style="document"/>
+            <wsdl:input name="deleteCar">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="deleteCarResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addCar">
+            <soap12:operation soapAction="" style="document"/>
+            <wsdl:input name="addCar">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="addCarResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCar">
+            <soap12:operation soapAction="" style="document"/>
+            <wsdl:input name="getCar">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getCarResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CarSoapService">
+        <wsdl:port binding="tns:CarSoapServiceSoapBinding" name="CarSOAP">
+            <soap12:address location="http://s0210:8083/soap-api/car"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

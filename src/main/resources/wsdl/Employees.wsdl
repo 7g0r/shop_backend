@@ -1,0 +1,231 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.employee.crud.employees.praktyki.technologies.transition/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EmployeeSoapControllerImplService" targetNamespace="http://soap.employee.crud.employees.praktyki.technologies.transition/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.employee.crud.employees.praktyki.technologies.transition/" targetNamespace="http://soap.employee.crud.employees.praktyki.technologies.transition/" version="1.0">
+            <xs:element name="BadDataException" type="tns:BadDataException"/>
+            <xs:element name="Employee" type="tns:employeeDto"/>
+            <xs:element name="Manager" type="tns:managerDto"/>
+            <xs:element name="NotFoundException" type="tns:NotFoundException"/>
+            <xs:element name="Page" type="tns:page"/>
+            <xs:element name="Position" type="tns:positionDto"/>
+            <xs:element name="addEmployee" type="tns:addEmployee"/>
+            <xs:element name="deleteEmployee" type="tns:deleteEmployee"/>
+            <xs:element name="deleteEmployeeResponse" type="tns:deleteEmployeeResponse"/>
+            <xs:element name="employeeResponse" type="tns:employeeResponse"/>
+            <xs:element name="getEmployee" type="tns:getEmployee"/>
+            <xs:element name="getEmployees" type="tns:getEmployees"/>
+            <xs:element name="getEmployeesResponse" type="tns:getEmployeesResponse"/>
+            <xs:element name="updateEmployee" type="tns:updateEmployee"/>
+            <xs:complexType name="addEmployee">
+                <xs:sequence>
+                    <xs:element name="employee" type="tns:employeeDto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="employeeDto">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractDto">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="manager" type="tns:managerDto"/>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element minOccurs="0" name="position" type="tns:positionDto"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="abstractDto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="managerDto">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractDto">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="positionDto">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractDto">
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="employeeResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="tns:employeeDto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateEmployee">
+                <xs:sequence>
+                    <xs:element name="employee" type="tns:employeeDto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NotFoundException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="deleteEmployee">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="deleteEmployeeResponse">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="getEmployees">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="page" type="tns:page"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="page">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="page" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rows" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getEmployeesResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:employeeDto"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="BadDataException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getEmployee">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getEmployeesResponse">
+        <wsdl:part element="tns:getEmployeesResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addEmployee">
+        <wsdl:part element="tns:addEmployee" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="BadDataException_Exception">
+        <wsdl:part element="tns:BadDataException" name="BadDataException_Exception"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeResponse">
+        <wsdl:part element="tns:employeeResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addEmployeeResponse">
+        <wsdl:part element="tns:employeeResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="updateEmployeeResponse">
+        <wsdl:part element="tns:employeeResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteEmployee">
+        <wsdl:part element="tns:deleteEmployee" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEmployees">
+        <wsdl:part element="tns:getEmployees" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getEmployee">
+        <wsdl:part element="tns:getEmployee" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="updateEmployee">
+        <wsdl:part element="tns:updateEmployee" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="NotFoundException_Exception">
+        <wsdl:part element="tns:NotFoundException" name="NotFoundException_Exception"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteEmployeeResponse">
+        <wsdl:part element="tns:deleteEmployeeResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="EmployeeSoapController">
+        <wsdl:operation name="addEmployee">
+            <wsdl:input message="tns:addEmployee" name="addEmployee"> </wsdl:input>
+            <wsdl:output message="tns:addEmployeeResponse" name="addEmployeeResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateEmployee">
+            <wsdl:input message="tns:updateEmployee" name="updateEmployee"> </wsdl:input>
+            <wsdl:output message="tns:updateEmployeeResponse" name="updateEmployeeResponse"> </wsdl:output>
+            <wsdl:fault message="tns:NotFoundException_Exception" name="NotFoundException_Exception"> </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="deleteEmployee">
+            <wsdl:input message="tns:deleteEmployee" name="deleteEmployee"> </wsdl:input>
+            <wsdl:output message="tns:deleteEmployeeResponse" name="deleteEmployeeResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployees">
+            <wsdl:input message="tns:getEmployees" name="getEmployees"> </wsdl:input>
+            <wsdl:output message="tns:getEmployeesResponse" name="getEmployeesResponse"> </wsdl:output>
+            <wsdl:fault message="tns:BadDataException_Exception" name="BadDataException_Exception"> </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployee">
+            <wsdl:input message="tns:getEmployee" name="getEmployee"> </wsdl:input>
+            <wsdl:output message="tns:getEmployeeResponse" name="getEmployeeResponse"> </wsdl:output>
+            <wsdl:fault message="tns:NotFoundException_Exception" name="NotFoundException_Exception"> </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="EmployeeSoapControllerImplServiceSoapBinding" type="tns:EmployeeSoapController">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="addEmployee">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="addEmployee">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="addEmployeeResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateEmployee">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="updateEmployee">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="updateEmployeeResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="NotFoundException_Exception">
+                <soap:fault name="NotFoundException_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="deleteEmployee">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="deleteEmployee">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="deleteEmployeeResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployees">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getEmployees">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getEmployeesResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="BadDataException_Exception">
+                <soap:fault name="BadDataException_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployee">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getEmployee">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getEmployeeResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="NotFoundException_Exception">
+                <soap:fault name="NotFoundException_Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EmployeeSoapControllerImplService">
+        <wsdl:port binding="tns:EmployeeSoapControllerImplServiceSoapBinding" name="EmployeeSoapControllerImplPort">
+            <soap:address location="http://s0209:8081/services/Employees"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

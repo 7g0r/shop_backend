@@ -1,0 +1,182 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.shop_backend.ichmielewski.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ProductCategorySoapControllerImplService" targetNamespace="http://soap.shop_backend.ichmielewski.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.shop_backend.ichmielewski.com/" elementFormDefault="unqualified" targetNamespace="http://soap.shop_backend.ichmielewski.com/" version="1.0">
+            <xs:element name="ProductCategory" type="tns:productCategoryDTO"/>
+            <xs:element name="addProductCategory" type="tns:addProductCategory"/>
+            <xs:element name="addProductCategoryResponse" type="tns:addProductCategoryResponse"/>
+            <xs:element name="deleteProductCategory" type="tns:deleteProductCategory"/>
+            <xs:element name="deleteProductCategoryResponse" type="tns:deleteProductCategoryResponse"/>
+            <xs:element name="getProductCategories" type="tns:getProductCategories"/>
+            <xs:element name="getProductCategoriesResponse" type="tns:getProductCategoriesResponse"/>
+            <xs:element name="getProductCategory" type="tns:getProductCategory"/>
+            <xs:element name="getProductCategoryResponse" type="tns:getProductCategoryResponse"/>
+            <xs:element name="updateProductCategories" type="tns:updateProductCategories"/>
+            <xs:element name="updateProductCategoriesResponse" type="tns:updateProductCategoriesResponse"/>
+            <xs:complexType name="deleteProductCategory">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="deleteProductCategoryResponse">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="getProductCategory">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getProductCategoryResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:productCategoryDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="productCategoryDTO">
+                <xs:complexContent>
+                    <xs:extension base="tns:abstractDTO">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="abstractDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getProductCategories">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:complexType name="getProductCategoriesResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:productCategoryDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateProductCategories">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="productCategory" type="tns:productCategoryDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateProductCategoriesResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:productCategoryDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="addProductCategory">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="productCategory" type="tns:productCategoryDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="addProductCategoryResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:productCategoryDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="deleteProductCategory">
+        <wsdl:part element="tns:deleteProductCategory" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addProductCategoryResponse">
+        <wsdl:part element="tns:addProductCategoryResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getProductCategory">
+        <wsdl:part element="tns:getProductCategory" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="updateProductCategories">
+        <wsdl:part element="tns:updateProductCategories" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getProductCategoryResponse">
+        <wsdl:part element="tns:getProductCategoryResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteProductCategoryResponse">
+        <wsdl:part element="tns:deleteProductCategoryResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getProductCategories">
+        <wsdl:part element="tns:getProductCategories" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getProductCategoriesResponse">
+        <wsdl:part element="tns:getProductCategoriesResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="updateProductCategoriesResponse">
+        <wsdl:part element="tns:updateProductCategoriesResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addProductCategory">
+        <wsdl:part element="tns:addProductCategory" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="ProductCategorySoapController">
+        <wsdl:operation name="deleteProductCategory">
+            <wsdl:input message="tns:deleteProductCategory" name="deleteProductCategory"> </wsdl:input>
+            <wsdl:output message="tns:deleteProductCategoryResponse" name="deleteProductCategoryResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getProductCategory">
+            <wsdl:input message="tns:getProductCategory" name="getProductCategory"> </wsdl:input>
+            <wsdl:output message="tns:getProductCategoryResponse" name="getProductCategoryResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getProductCategories">
+            <wsdl:input message="tns:getProductCategories" name="getProductCategories"> </wsdl:input>
+            <wsdl:output message="tns:getProductCategoriesResponse" name="getProductCategoriesResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateProductCategories">
+            <wsdl:input message="tns:updateProductCategories" name="updateProductCategories"> </wsdl:input>
+            <wsdl:output message="tns:updateProductCategoriesResponse" name="updateProductCategoriesResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addProductCategory">
+            <wsdl:input message="tns:addProductCategory" name="addProductCategory"> </wsdl:input>
+            <wsdl:output message="tns:addProductCategoryResponse" name="addProductCategoryResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ProductCategorySoapControllerImplServiceSoapBinding" type="tns:ProductCategorySoapController">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="deleteProductCategory">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="deleteProductCategory">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="deleteProductCategoryResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getProductCategory">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getProductCategory">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getProductCategoryResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getProductCategories">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getProductCategories">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getProductCategoriesResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateProductCategories">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="updateProductCategories">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="updateProductCategoriesResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addProductCategory">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="addProductCategory">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="addProductCategoryResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ProductCategorySoapControllerImplService">
+        <wsdl:port binding="tns:ProductCategorySoapControllerImplServiceSoapBinding" name="ProductCategorySoapControllerImplPort">
+            <soap:address location="http://localhost:8080/services/Categories"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
